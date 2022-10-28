@@ -86,7 +86,6 @@ NodeContainer::begin ()
   return m_nodes.begin ();
 }
 
-
 NodeContainer::Iterator
 NodeContainer::End (void) const
 {
@@ -124,9 +123,9 @@ NodeContainer::Get (uint32_t i) const
 }
 
 Ptr<Node> &
-NodeContainer::operator [] (uint32_t i)
+NodeContainer::operator[] (uint32_t i)
 {
-  return m_nodes [i];
+  return m_nodes[i];
 }
 
 void
@@ -137,6 +136,16 @@ NodeContainer::Create (uint32_t n)
       m_nodes.push_back (CreateObject<Node> ());
     }
 }
+
+void
+NodeContainer::Create (std::vector<std::string> array)
+{
+  for (uint32_t i = 0; i < array.size (); i++)
+    {
+      m_nodes.push_back (CreateObject<Node> (array[i]));
+    }
+}
+
 void
 NodeContainer::Create (uint32_t n, uint32_t systemId)
 {
