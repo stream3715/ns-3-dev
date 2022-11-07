@@ -5,7 +5,7 @@ t2c() {
 
 if [ $# -ne 4 ]; then
     echo "指定された引数は$#個です。" 1>&2
-    echo "実行するには3個の引数が必要です。" 1>&2
+    echo "実行するには4個の引数が必要です。" 1>&2
     exit 1
 fi
 
@@ -17,7 +17,7 @@ export ID_CON_MN=$4
 
 if [ $? -ne 0 ]; then
     echo "シミュレーションに失敗"
-    rm *.tsv *.log
+    rm *.tsv *.log 2> /dev/null
     exit -1
 fi
 
