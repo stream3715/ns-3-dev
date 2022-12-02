@@ -9,6 +9,7 @@ if [ $# -ne 4 ]; then
     exit 1
 fi
 
+export CS_SIZE=$1
 export ID_PRD=$2
 export ID_CON_MJ=$3
 export ID_CON_MN=$4
