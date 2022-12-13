@@ -2,8 +2,8 @@
 include .env
 
 export
-ifdef ${DEBUG}
-	DEBUG_NSLOG := "*=level_debug|prefix_func|prefix_time|prefix_node"
+ifneq ($(origin DEBUG),undefined)
+	NS_LOG := *=level_debug|prefix_func|prefix_time|prefix_node
 endif
 
 CS_SIZE := ${CS_SIZE}
@@ -45,6 +45,8 @@ run-kademlia: all
 	./t2c.sh result-k/${CS_SIZE}/${ID_PRD}/${ID_CON_MJ}-${ID_CON_MN} k-${CS_SIZE}-drop-trace-${ID_PRD}-${ID_CON_MJ}-${ID_CON_MN}.tsv
 	./t2c.sh result-k/${CS_SIZE}/${ID_PRD}/${ID_CON_MJ}-${ID_CON_MN} k-${CS_SIZE}-rate-trace-${ID_PRD}-${ID_CON_MJ}-${ID_CON_MN}.tsv
 
+	./stats.sh result-k/${CS_SIZE}/${ID_PRD}/${ID_CON_MJ}-${ID_CON_MN} k-${CS_SIZE}-app-delays-trace-${ID_PRD}-${ID_CON_MJ}-${ID_CON_MN}.tsv.csv
+
 run-vanilla: all
 	@env | ./waf --run=ndn-kademlia > v-${ID_PRD}-${ID_CON_MJ}-${ID_CON_MN}.log
 
@@ -60,6 +62,7 @@ run-vanilla: all
 	./t2c.sh result-v/${CS_SIZE}/${ID_PRD}/${ID_CON_MJ}-${ID_CON_MN} v-${CS_SIZE}-drop-trace-${ID_PRD}-${ID_CON_MJ}-${ID_CON_MN}.tsv
 	./t2c.sh result-v/${CS_SIZE}/${ID_PRD}/${ID_CON_MJ}-${ID_CON_MN} v-${CS_SIZE}-rate-trace-${ID_PRD}-${ID_CON_MJ}-${ID_CON_MN}.tsv
 
+	./stats.sh result-v/${CS_SIZE}/${ID_PRD}/${ID_CON_MJ}-${ID_CON_MN} v-${CS_SIZE}-app-delays-trace-${ID_PRD}-${ID_CON_MJ}-${ID_CON_MN}.tsv.csv
 
 switch-vanilla:
 	git checkout ndn-vanilla
