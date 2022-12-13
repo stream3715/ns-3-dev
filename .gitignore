@@ -88,5 +88,6 @@ massif.*
 src/ndnSIM
 configure
 toggle
+.env
 
 result-*/
