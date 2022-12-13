@@ -2,8 +2,8 @@
 include .env
 
 export
-ifdef ${DEBUG}
-	DEBUG_NSLOG := "*=level_debug|prefix_func|prefix_time|prefix_node"
+ifneq (origin DEBUG,undefined)
+	NS_LOG := *=level_debug|prefix_func|prefix_time|prefix_node
 endif
 
 CS_SIZE := ${CS_SIZE}
